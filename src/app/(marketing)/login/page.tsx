@@ -34,7 +34,7 @@ export default function LoginPage() {
         setLoading(false);
         setPin('');
       }
-    }, 800);
+    }, 200);
   };
 
   return (
@@ -67,7 +67,14 @@ export default function LoginPage() {
                 inputMode="numeric"
                 pattern="[0-9]*"
                 value={pin}
-                onChange={(e) => setPin(e.target.value.replace(/[^0-9]/g, ''))}
+                onChange={(e) => {
+                  const val = e.target.value.replace(/[^0-9]/g, '');
+                  setPin(val);
+                  if (val.length === 6) {
+                    router.prefetch('/dashboard');
+                    router.prefetch('/dashboard/database');
+                  }
+                }}
                 className={`w-full pl-12 pr-12 py-4 bg-gray-50/50 border-2 rounded-xl text-center text-3xl tracking-[0.4em] font-mono outline-none focus:bg-white transition-all ${error ? 'border-red-400 text-red-600 focus:ring-red-400' : 'border-gray-200 text-gray-900 focus:border-brand-primary focus:ring-4 focus:ring-brand-primary/10'}`}
                 placeholder="••••••"
                 required
