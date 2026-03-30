@@ -3,7 +3,7 @@ import { createClient } from '@supabase/supabase-js';
 // Menggunakan Service Role Key khusus untuk menembus pertahanan Row Level Security (RLS) di level Backend
 const supabaseAdmin = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://placeholder.supabase.co',
-  process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
+  process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'placeholder-key'
 );
 
 // Shared function to parse disaster reports using Groq AI
