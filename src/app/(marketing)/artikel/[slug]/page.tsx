@@ -12,16 +12,15 @@ const mockArticles = {
     content: (
       <>
         <p className="text-xl text-gray-900 font-medium mb-8 leading-relaxed">
-          Dalam kondisi darurat, setiap detik sangat berharga. Sistem Siap Bencana dirancang agar Anda bisa melapor hanya dengan satu pesan singkat (SMS atau Telegram), sekalipun Anda tidak memiliki kuota internet yang cukup untuk membuka aplikasi.
+          Dalam kondisi darurat, setiap detik sangat berharga. Sistem Siap Bencana dirancang agar Anda bisa melapor hanya dengan satu pesan singkat (SMS), sekalipun Anda tidak memiliki kuota internet yang cukup untuk membuka aplikasi.
         </p>
 
         <h2 className="text-2xl font-bold text-gray-900 mt-10 mb-4">Langkah 1: Menyimpan Nomor Darurat</h2>
         <p className="mb-4 text-gray-700 leading-relaxed">
-          Pastikan Anda sudah menyimpan kontak Pusat Komando Siap Bencana di HP Anda sekarang juga. Anda bisa menggunakan salah satu dari dua jalur berikut:
+          Pastikan Anda sudah menyimpan kontak Admin Panel Siap Bencana di HP Anda sekarang juga. Anda bisa melapor melalui jalur berikut:
         </p>
         <ul className="list-disc pl-6 mb-6 space-y-2 text-gray-700">
-          <li><strong>Telegram:</strong> Cari bot <code>@SiapBencanaBot</code> dan tekan tombol "Start" lalu bagikan kontak Anda.</li>
-          <li><strong>SMS:</strong> Simpan nomor <strong>+62 811-XXXX-XXXX</strong> di kontak Anda.</li>
+          <li><strong>SMS:</strong> Simpan nomor <strong>+62 851-8307-1646</strong> di kontak Anda.</li>
         </ul>
 
         <h2 className="text-2xl font-bold text-gray-900 mt-10 mb-4">Langkah 2: Cara Mengirim Pesan Saat Darurat</h2>
@@ -40,7 +39,7 @@ const mockArticles = {
         <ol className="list-decimal pl-6 mb-12 space-y-2 text-gray-700">
           <li>Sistem akan mendeteksi tingkat keparahan laporan (CRITICAL, HIGH, INFO).</li>
           <li>Sistem mencocokkan nomor telepon Anda dengan pangkalan data registrasi warga untuk menemukan titik koordinat absolut lokasi rumah Anda.</li>
-          <li>Titik merah akan berkedip di Peta Command Center BPBD, dan Tim SAR segera diluncurkan ke lokasi Anda.</li>
+          <li>Titik merah akan berkedip di Peta Admin Panel BPBD, dan Tim SAR segera diluncurkan ke lokasi Anda.</li>
         </ol>
       </>
     )

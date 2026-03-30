@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { supabase } from '@/lib/supabase';
-import { Search, Filter, Download } from 'lucide-react';
+import { Search, Filter, Download, Trash2 } from 'lucide-react';
 
 export default function DatabasePage() {
   const [reports, setReports] = useState<any[]>([]);
@@ -22,6 +22,45 @@ export default function DatabasePage() {
     fetchAll();
   }, []);
 
+  const handleDelete = async (id: string) => {
+    if (!window.confirm('Apakah Anda yakin ingin menghapus laporan ini secara permanen?')) return;
+    
+    const { error } = await supabase
+      .from('emergency_reports')
+      .delete()
+      .eq('id', id);
+
+    if (error) {
+      alert('Gagal menghapus data: ' + error.message);
+    } else {
+      setReports(prev => prev.filter(row => row.id !== id));
+    }
+  };
+
+  const exportToCSV = () => {
+    if (reports.length === 0) return alert('Tidak ada data untuk diekspor');
+
+    const headers = ['Waktu', 'Pengirim', 'Tipe Bencana', 'Lokasi', 'Urgensi', 'Status'];
+    const csvRows = reports.map(row => [
+      new Date(row.created_at).toLocaleString('id-ID'),
+      `"${row.sender_id}"`,
+      `"${row.disaster_type}"`,
+      `"${row.extracted_location}"`,
+      row.urgency_level,
+      row.status
+    ].join(','));
+
+    const csvString = [headers.join(','), ...csvRows].join('\n');
+    const blob = new Blob([csvString], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', `laporan_siap_bencana_${new Date().toISOString().split('T')[0]}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <div className="p-4 md:p-8 w-full h-full overflow-y-auto bg-gray-50/50">
       <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden max-w-7xl mx-auto">
@@ -40,7 +79,10 @@ export default function DatabasePage() {
               <button className="flex items-center justify-center gap-2 bg-white border border-gray-300 text-gray-700 font-semibold px-4 py-2 rounded-lg text-sm hover:bg-gray-50 transition shadow-sm w-full sm:w-auto">
                 <Filter className="w-4 h-4" /> Filter Urgensi
               </button>
-              <button className="flex items-center justify-center gap-2 bg-brand-primary text-white font-semibold px-4 py-2 rounded-lg text-sm hover:bg-brand-accent transition shadow-sm w-full sm:w-auto">
+              <button 
+                onClick={exportToCSV}
+                className="flex items-center justify-center gap-2 bg-brand-primary text-white font-semibold px-4 py-2 rounded-lg text-sm hover:bg-brand-accent transition shadow-sm w-full sm:w-auto"
+              >
                 <Download className="w-4 h-4" /> Export CSV
               </button>
            </div>
@@ -57,12 +99,13 @@ export default function DatabasePage() {
                 <th className="px-6 py-4">Lokasi (AI parsed)</th>
                 <th className="px-6 py-4">Tingkat Urgensi</th>
                 <th className="px-6 py-4">Sistem Status</th>
+                <th className="px-6 py-4 text-center">Aksi</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100">
               {loading ? (
                 <tr>
-                  <td colSpan={6} className="text-center py-16 font-medium text-gray-400">
+                  <td colSpan={7} className="text-center py-16 font-medium text-gray-400">
                     <div className="flex flex-col items-center gap-2">
                        <span className="w-6 h-6 border-2 border-brand-primary border-t-transparent rounded-full animate-spin"></span>
                        <span>Memuat database...</span>
@@ -71,7 +114,7 @@ export default function DatabasePage() {
                 </tr>
               ) : reports.length === 0 ? (
                 <tr>
-                  <td colSpan={6} className="text-center py-12 font-medium text-gray-400">Belum ada laporan bencana dalam sistem.</td>
+                  <td colSpan={7} className="text-center py-12 font-medium text-gray-400">Belum ada laporan bencana dalam sistem.</td>
                 </tr>
               ) : (
                 reports.map((row) => (
@@ -103,6 +146,15 @@ export default function DatabasePage() {
                       <span className={`text-[11px] font-extrabold px-3 py-1 rounded-full uppercase tracking-wider border shadow-sm ${row.status === 'RESOLVED' ? 'text-emerald-600 border-emerald-200 bg-emerald-50' : 'text-gray-600 border-gray-200 bg-gray-50'}`}>
                         {row.status}
                       </span>
+                    </td>
+                    <td className="px-6 py-4 text-center">
+                      <button 
+                        onClick={() => handleDelete(row.id)}
+                        className="text-red-400 hover:text-red-600 p-2 hover:bg-red-50 rounded-lg transition-colors"
+                        title="Hapus Laporan"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
                     </td>
                   </tr>
                 ))

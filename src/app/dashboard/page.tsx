@@ -12,7 +12,7 @@ const MapView = dynamic(() => import('@/components/dashboard/MapView'), {
   loading: () => (
     <div className="absolute inset-0 flex flex-col items-center justify-center p-8 text-center bg-blue-50/50">
       <div className="w-16 h-16 border-4 border-brand-primary border-t-transparent rounded-full animate-spin mb-4"></div>
-      <p className="font-semibold text-lg text-brand-primary">Mempersiapkan Peta Tim SAR...</p>
+      <p className="font-semibold text-lg text-brand-primary">Mempersiapkan Peta Tim SAR Admin Panel...</p>
     </div>
   )
 });
@@ -121,7 +121,7 @@ export default function DashboardPage() {
              </div>
           )}
 
-          {reports.map((report) => (
+          {reports.map((report, index) => (
             <div 
               key={report.id} 
               className={`bg-white rounded-xl border border-gray-100 border-l-4 shadow-sm p-5 hover:shadow-md transition-shadow relative 
@@ -129,12 +129,20 @@ export default function DashboardPage() {
                   report.urgency_level === 'HIGH' ? 'border-l-amber-500' : 'border-l-triage-info opacity-80 hover:opacity-100'}`}
             >
               <div className="flex justify-between items-start mb-3">
-                <span className={`text-[10px] font-extrabold px-2.5 py-1 rounded-sm uppercase tracking-widest
-                  ${report.urgency_level === 'CRITICAL' ? 'bg-red-100 text-triage-critical' : 
-                    report.urgency_level === 'HIGH' ? 'bg-amber-100 text-amber-700' : 'bg-blue-100 text-triage-info'}`}
-                >
-                  {report.urgency_level}
-                </span>
+                <div className="flex gap-2 items-center">
+                  <span className={`text-[10px] font-extrabold px-2.5 py-1 rounded-sm uppercase tracking-widest shadow-sm
+                    ${report.urgency_level === 'CRITICAL' ? 'bg-red-600 text-white' : 
+                      report.urgency_level === 'HIGH' ? 'bg-amber-500 text-white' : 'bg-blue-600 text-white'}`}
+                  >
+                    PRIORITAS #{index + 1}
+                  </span>
+                  <span className={`text-[10px] font-extrabold px-2.5 py-1 rounded-sm uppercase tracking-widest border
+                    ${report.urgency_level === 'CRITICAL' ? 'border-red-200 text-triage-critical bg-red-50' : 
+                      report.urgency_level === 'HIGH' ? 'border-amber-200 text-amber-700 bg-amber-50' : 'border-blue-200 text-triage-info bg-blue-50'}`}
+                  >
+                    {report.urgency_level}
+                  </span>
+                </div>
                 <span className="text-xs text-gray-500 font-bold flex items-center gap-1">
                   <Clock className="w-3.5 h-3.5"/> {timeAgo(report.created_at)}
                 </span>
@@ -144,7 +152,7 @@ export default function DashboardPage() {
                  {report.extracted_location}
               </h4>
               
-              <p className="text-xs text-gray-500 font-bold mb-2 uppercase tracking-wider">{report.disaster_type} {report.vulnerable_people ? '• (ADA KORBAN RENTAN)' : ''}</p>
+              <p className="text-xs text-gray-500 font-bold mb-2 uppercase tracking-wider">{report.disaster_type} {report.vulnerable_people ? '- (ADA KORBAN RENTAN)' : ''}</p>
               
               <p className="text-gray-600 text-sm mb-5 italic border-l-2 border-gray-200 pl-3 leading-relaxed">
                 "{report.raw_message}"

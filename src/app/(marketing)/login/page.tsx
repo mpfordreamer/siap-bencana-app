@@ -2,13 +2,14 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Shield, Lock, ArrowRight, AlertCircle } from 'lucide-react';
+import { Shield, Lock, ArrowRight, AlertCircle, Eye, EyeOff } from 'lucide-react';
 import Link from 'next/link';
 
 export default function LoginPage() {
   const [pin, setPin] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [showPin, setShowPin] = useState(false);
   const router = useRouter();
 
   const handleLogin = (e: React.FormEvent) => {
@@ -16,9 +17,11 @@ export default function LoginPage() {
     setError('');
     setLoading(true);
 
-    // Hardcoded MVP PIN logic as per PRD (123456)
+    // Dynamic PIN logic: Fetch from localStorage or use default
+    const savedPin = typeof window !== 'undefined' ? localStorage.getItem('admin_pin') || '123456' : '123456';
+
     setTimeout(() => {
-      if (pin === '123456') {
+      if (pin === savedPin) {
         // In a real app, set a secure HTTP-Only cookie here via an API route.
         // For this PWA frontend MVP, a simple localStorage flag is sufficient for immediate UX demonstration.
         if (typeof window !== 'undefined') {
@@ -39,44 +42,50 @@ export default function LoginPage() {
       <div className="w-full max-w-md bg-white rounded-3xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.1)] border border-gray-100 overflow-hidden relative">
         {/* Top Decorative Header */}
         <div className="h-32 bg-gradient-to-br from-brand-primary to-blue-800 absolute top-0 left-0 right-0 z-0">
-           <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-20"></div>
+          <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-20"></div>
         </div>
-        
+
         <div className="relative z-10 pt-16 px-8 pb-10 flex flex-col items-center">
-          
           <div className="w-24 h-24 bg-white rounded-2xl flex items-center justify-center shadow-xl border-4 border-gray-50 mb-6 rotate-3 transform hover:rotate-0 transition-transform duration-300">
             <Shield className="w-12 h-12 text-brand-primary" />
           </div>
-          
+
           <h2 className="text-2xl font-extrabold text-gray-900 mb-2 tracking-tight">Otorisasi Petugas</h2>
           <p className="text-sm text-gray-500 font-medium text-center mb-8 px-2 leading-relaxed">
-            Silakan masukkan <span className="font-bold text-gray-700">6 digit PIN</span> rahasia untuk masuk ke Command Center Operasional.
+            Silakan masukkan <span className="font-bold text-gray-700">6 digit PIN</span> rahasia untuk masuk ke Admin Panel Operasional.
           </p>
 
           <form onSubmit={handleLogin} className="w-full">
             <div className="mb-6 relative">
               <label className="sr-only">PIN Keamanan</label>
-              <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+              <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none z-10">
                 <Lock className="h-5 w-5 text-gray-400" />
               </div>
               <input
-                type="password"
+                type={showPin ? "text" : "password"}
                 maxLength={6}
                 inputMode="numeric"
                 pattern="[0-9]*"
                 value={pin}
                 onChange={(e) => setPin(e.target.value.replace(/[^0-9]/g, ''))}
-                className={`w-full pl-12 pr-4 py-4 bg-gray-50/50 border-2 rounded-xl text-center text-3xl tracking-[0.4em] font-mono outline-none focus:bg-white transition-all ${error ? 'border-red-400 text-red-600 focus:ring-red-400' : 'border-gray-200 text-gray-900 focus:border-brand-primary focus:ring-4 focus:ring-brand-primary/10'}`}
+                className={`w-full pl-12 pr-12 py-4 bg-gray-50/50 border-2 rounded-xl text-center text-3xl tracking-[0.4em] font-mono outline-none focus:bg-white transition-all ${error ? 'border-red-400 text-red-600 focus:ring-red-400' : 'border-gray-200 text-gray-900 focus:border-brand-primary focus:ring-4 focus:ring-brand-primary/10'}`}
                 placeholder="••••••"
                 required
               />
+              <button
+                type="button"
+                onClick={() => setShowPin(!showPin)}
+                className="absolute right-3 top-1/2 -translate-y-1/2 p-2 text-gray-400 hover:text-brand-primary transition-colors focus:outline-none z-10"
+              >
+                {showPin ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+              </button>
             </div>
 
             {error && (
-               <div className="mb-6 p-4 bg-red-50 rounded-xl flex items-start gap-3 text-sm text-red-700 font-bold border border-red-100 animate-in shake">
-                 <AlertCircle className="w-5 h-5 shrink-0" />
-                 <span>{error}</span>
-               </div>
+              <div className="mb-6 p-4 bg-red-50 rounded-xl flex items-start gap-3 text-sm text-red-700 font-bold border border-red-100 animate-in shake">
+                <AlertCircle className="w-5 h-5 shrink-0" />
+                <span>{error}</span>
+              </div>
             )}
 
             <button
@@ -92,6 +101,11 @@ export default function LoginPage() {
                 </>
               )}
             </button>
+
+            {/* Default PIN Note */}
+            <p className="mt-6 text-[10px] text-gray-400 font-bold text-center uppercase tracking-widest">
+              Lupa PIN? Gunakan PIN Bawaan: <span className="text-gray-600">123456</span>
+            </p>
           </form>
 
           <div className="mt-10 text-center">

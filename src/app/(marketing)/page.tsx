@@ -3,6 +3,8 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import homeSvg from "@/assets/home.svg";
+import logoSvg from "@/assets/siapbencana.svg";
+import workflowImg from "@/assets/workflow.png";
 import { Button } from '@/components/ui/Button';
 import { ShieldCheck, MessageSquare, MapPin, WifiOff, AlertCircle, Smartphone, Zap, CheckCircle2 } from 'lucide-react';
 
@@ -21,28 +23,28 @@ export default function MarketingPage() {
                 Evakuasi Lebih Cepat.
               </h1>
               <p className="text-lg md:text-xl text-gray-600 mb-10 leading-relaxed max-w-2xl mx-auto lg:mx-0">
-                Jangan tunggu sampai panik. Daftarkan alamat rumah Anda sekarang. Saat bencana datang dan internet putus, cukup kirim satu SMS/Telegram, dan tim SAR akan tahu persis di mana Anda berada.
+                Jangan tunggu sampai panik. Daftarkan alamat rumah Anda sekarang. Saat bencana datang dan internet putus, cukup kirim satu pesan SMS, dan tim SAR akan tahu persis di mana Anda berada.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                 <Link href="/register" className="w-full sm:w-auto">
                   <Button variant="primary" className="w-full text-lg py-4 px-8">
-                    Daftarkan Rumah Saya (Gratis)
+                    Daftarkan Rumah Saya
                   </Button>
                 </Link>
-                <Button variant="outline" className="w-full sm:w-auto text-lg py-4 px-8" onClick={() => alert('Kontak Darurat Tersimpan!\nTelegram: @SiapBencanaBot\nSMS: +62 811-XXXX-XXXX')}>
+                <Button variant="outline" className="w-full sm:w-auto text-lg py-4 px-8" onClick={() => alert('Kontak Darurat Tersimpan!\nSMS: +62 851-8307-1646')}>
                   Simpan Nomor Darurat
                 </Button>
               </div>
             </div>
 
-            <div className="order-1 lg:order-2 flex justify-center">
-              {/* Abstract Illustration Placeholder matching the prompt mood */}
-              <div className="relative w-full max-w-md aspect-square rounded-full bg-blue-100 flex items-center justify-center shadow-lg border-8 border-white overflow-hidden">
+            <div className="order-1 lg:order-2 flex justify-center text-center">
+              {/* Modern Square-ish Illustration Container with Black Shadow Animation */}
+              <div className="relative w-full max-w-md aspect-square rounded-[3rem] bg-blue-100 flex items-center justify-center shadow-2xl border-8 border-white overflow-hidden transform rotate-2 hover:rotate-0 hover:shadow-[0_30px_70px_-15px_rgba(0,0,0,0.8)] transition-all duration-500">
                 <Image
                   src={homeSvg}
                   alt="Ilustrasi Siap Bencana"
-                  className="absolute inset-0 w-full h-full object-cover opacity-80 mix-blend-multiply bg-brand-primary/20"
+                  className="absolute inset-0 w-full h-full object-cover opacity-90 mix-blend-multiply bg-brand-primary/10"
                   priority
                 />
                 <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-brand-primary/80 to-transparent" />
@@ -133,7 +135,7 @@ export default function MarketingPage() {
               </div>
               <h3 className="text-2xl font-bold mb-4">Langkah 2: Saat Darurat</h3>
               <p className="text-gray-200 leading-relaxed text-lg">
-                Kirim chat ke Bot Telegram atau SMS. Ketik pesannya seadanya. Walau panik, sistem otomatis mengenali nomor HP Anda dan mencocokkan dengan alamat.
+                Kirim pesan melalui SMS Gateway. Ketik pesannya seadanya. Walau panik, sistem otomatis mengenali nomor HP Anda dan mencocokkan dengan alamat.
               </p>
             </div>
 
@@ -164,7 +166,7 @@ export default function MarketingPage() {
               <Smartphone className="w-14 h-14 text-triage-info mx-auto mb-6 bg-emerald-50 rounded-lg p-2" />
               <h3 className="text-2xl font-bold text-gray-900 mb-4">Tanpa Aplikasi Baru</h3>
               <p className="text-gray-600 font-medium leading-relaxed">
-                Hemat memori HP. Gunakan aplikasi Telegram yang sudah ada, atau gunakan SMS biasa jika internet mati total.
+                Hemat memori HP. Gunakan portal web ini atau gunakan SMS biasa jika internet mati total.
               </p>
             </div>
 
@@ -180,7 +182,7 @@ export default function MarketingPage() {
               <ShieldCheck className="w-14 h-14 text-triage-info mx-auto mb-6 bg-emerald-50 rounded-lg p-2" />
               <h3 className="text-2xl font-bold text-gray-900 mb-4">Privasi Terjaga</h3>
               <p className="text-gray-600 font-medium leading-relaxed">
-                Data alamat Anda disimpan super aman dan hanya "dibuka" di peta petugas relawan di Command Center khusus saat Anda mengirim SMS darurat.
+                Data alamat Anda disimpan super aman dan hanya "dibuka" di peta petugas relawan di Admin Panel khusus saat Anda mengirim SMS darurat.
               </p>
             </div>
           </div>
@@ -220,7 +222,7 @@ export default function MarketingPage() {
               <div className="p-8 flex-grow flex flex-col">
                 <p className="text-xs text-brand-primary mb-3 font-bold tracking-widest">BACAAN WAJIB • 3 MENIT</p>
                 <h3 className="text-xl font-semibold text-gray-900 mb-4 group-hover:text-brand-primary transition-colors leading-snug">
-                  Cara Menggunakan Sistem Laporan Darurat SMS/Telegram Siap Bencana
+                  Cara Menggunakan Sistem Laporan Darurat SMS Siap Bencana
                 </h3>
                 <p className="text-gray-600 line-clamp-3 leading-relaxed mb-6 flex-grow font-medium">
                   Langkah-demi-langkah mengirimkan pesan SOS saat kuota habis atau saat air mulai meninggi. Pelajari format pesannya sekarang agar sigap saat darurat.
@@ -283,6 +285,57 @@ export default function MarketingPage() {
               </div>
             </Link>
 
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 4.6: LIVE DEMO GUIDE */}
+      <section className="py-24 bg-gray-50 border-t border-gray-200 relative overflow-hidden">
+        <div className="absolute top-0 right-0 p-20 opacity-5">
+          <Zap className="w-96 h-96 text-brand-primary" />
+        </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="bg-white rounded-[2.5rem] p-8 md:p-16 shadow-2xl border border-gray-100 flex flex-col lg:flex-row items-center gap-12">
+            <div className="lg:w-1/2">
+              <span className="inline-block bg-orange-100 text-orange-700 text-xs font-black px-4 py-2 rounded-full uppercase tracking-widest mb-6">Live Demo Experience</span>
+              <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight tracking-tight">
+                Uji Coba Sistem Secara Langsung
+              </h2>
+              <p className="text-lg text-gray-600 mb-10 leading-relaxed font-medium">
+                Rasakan Sistem AI kami dalam memproses laporan darurat secara real-time dari dua sudut pandang berbeda.
+              </p>
+
+              <div className="space-y-8">
+                <div className="flex gap-5">
+                  <div className="w-12 h-12 bg-brand-primary text-white rounded-full flex items-center justify-center font-bold text-xl shrink-0 shadow-lg">1</div>
+                  <div>
+                    <h4 className="font-bold text-gray-900 text-xl mb-2">Simulasi Laporan Warga</h4>
+                    <p className="text-gray-500 font-medium">Klik widget Chatbot di pojok kanan bawah layar ini. Kirim laporan simulasi seperti "Banjir di Jalan Merdeka" dan lihat bagaimana AI merespon.</p>
+                  </div>
+                </div>
+
+                <div className="flex gap-5">
+                  <div className="w-12 h-12 bg-orange-600 text-white rounded-full flex items-center justify-center font-bold text-xl shrink-0 shadow-lg">2</div>
+                  <div>
+                    <h4 className="font-bold text-gray-900 text-xl mb-2">Pantau Dashboard Petugas</h4>
+                    <p className="text-gray-500 font-medium">Setelah mengirim laporan, klik tombol "PANEL ADMIN DASHBOARD" di bagian atas halaman untuk melihat laporan Anda muncul di peta secara otomatis.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="lg:w-1/2 w-full">
+              <div className="relative p-2 bg-gray-200 rounded-3xl shadow-inner group">
+                <div className="absolute -inset-1 bg-gradient-to-r from-brand-primary to-orange-600 rounded-3xl blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
+                <div className="relative bg-white rounded-2xl overflow-hidden aspect-video flex items-center justify-center">
+                  <Image
+                    src={workflowImg}
+                    alt="Visualisasi Workflow Admin Panel"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>

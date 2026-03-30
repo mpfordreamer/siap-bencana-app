@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next';
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'Siap Bencana Command Center',
+    name: 'Siap Bencana Admin Panel',
     short_name: 'Siap Bencana',
     description: 'Aplikasi Triage Darurat AI & Manajemen Bencana Berbasis Peta',
     start_url: '/',

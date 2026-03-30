@@ -21,7 +21,7 @@ export default function HeaderDropdown() {
 
   return (
     <div className="relative" ref={dropdownRef}>
-      <button 
+      <button
         onClick={() => setIsOpen(!isOpen)}
         className="w-11 h-11 rounded-full bg-brand-primary/10 hover:bg-brand-primary/20 border border-brand-primary/20 flex items-center justify-center text-brand-primary transition-all focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2 shrink-0"
         aria-label="User menu"
@@ -35,13 +35,13 @@ export default function HeaderDropdown() {
             <p className="text-sm font-bold text-gray-900 leading-tight">Portal Akses</p>
             <p className="text-[11px] text-gray-500 font-bold uppercase tracking-widest mt-1">Khusus Tim SAR</p>
           </div>
-          <Link 
+          <Link
             href="/login"
             onClick={() => setIsOpen(false)}
             className="flex items-center gap-3 px-5 py-3 text-sm font-bold text-gray-700 hover:bg-blue-50 hover:text-brand-primary transition-colors w-full text-left"
           >
             <ShieldAlert className="w-4 h-4 shrink-0" />
-            Login Command Center
+            Login Admin Panel
           </Link>
         </div>
       )}

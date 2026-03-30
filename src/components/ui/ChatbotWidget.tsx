@@ -7,13 +7,13 @@ import { useChat } from 'ai/react';
 export function ChatbotWidget() {
   const [isOpen, setIsOpen] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  
+
   const { messages, input, handleInputChange, handleSubmit, isLoading, error } = useChat({
     initialMessages: [
       {
         id: 'welcome-message',
         role: 'assistant',
-        content: 'Halo! Saya adalah Asisten AI Siap Bencana. 👋\n\nSistem ini dirancang untuk mempercepat respons Tim SAR secara otomatis.\n\nUntuk mencoba simulasi Pelaporan Cepat, silakan ketik musibah dan lokasi Anda. (Contoh: "Tolong, tanggul jebol di Jalan Margahayu").'
+        content: 'Halo! Saya adalah Asisten AI Siap Bencana.\n\nSistem ini dirancang untuk mempercepat respons Tim SAR secara otomatis.\n\nUntuk mencoba simulasi Pelaporan Cepat, silakan ketik musibah dan lokasi Anda. (Contoh: "Tolong, tanggul jebol di Jalan Margahayu").'
       }
     ]
   });
@@ -45,7 +45,7 @@ export function ChatbotWidget() {
               <X className="w-5 h-5" />
             </button>
           </div>
-          
+
           {/* Chat Body */}
           <div className="p-5 h-80 overflow-y-auto bg-[#F8FAFC] flex flex-col gap-4">
             {messages.map((m: any) => (
@@ -53,36 +53,35 @@ export function ChatbotWidget() {
                 <div className={`p-2 rounded-full flex-shrink-0 shadow-sm mt-1 ${m.role === 'user' ? 'bg-gray-200' : 'bg-brand-primary'}`}>
                   {m.role === 'user' ? <User className="w-4 h-4 text-gray-600" /> : <Bot className="w-4 h-4 text-white" />}
                 </div>
-                <div className={`border p-3.5 rounded-2xl text-sm shadow-sm leading-relaxed whitespace-pre-wrap ${
-                  m.role === 'user' 
-                    ? 'bg-brand-accent text-white border-transparent rounded-tr-none' 
+                <div className={`border p-3.5 rounded-2xl text-sm shadow-sm leading-relaxed whitespace-pre-wrap ${m.role === 'user'
+                    ? 'bg-brand-accent text-white border-transparent rounded-tr-none'
                     : 'bg-white border-gray-200 text-gray-700 rounded-tl-none'
-                }`}>
+                  }`}>
                   {m.content}
                 </div>
               </div>
             ))}
             {isLoading && (
               <div className="flex items-start gap-3">
-                 <div className="bg-brand-primary p-2 rounded-full flex-shrink-0 shadow-sm mt-1">
-                   <Bot className="w-4 h-4 text-white" />
-                 </div>
-                 <div className="bg-white border border-gray-200 p-4 rounded-2xl rounded-tl-none flex gap-1 items-center shadow-sm">
-                   <span className="w-2 h-2 bg-gray-300 rounded-full animate-bounce"></span>
-                   <span className="w-2 h-2 bg-gray-300 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></span>
-                   <span className="w-2 h-2 bg-gray-300 rounded-full animate-bounce" style={{ animationDelay: '0.4s' }}></span>
-                 </div>
+                <div className="bg-brand-primary p-2 rounded-full flex-shrink-0 shadow-sm mt-1">
+                  <Bot className="w-4 h-4 text-white" />
+                </div>
+                <div className="bg-white border border-gray-200 p-4 rounded-2xl rounded-tl-none flex gap-1 items-center shadow-sm">
+                  <span className="w-2 h-2 bg-gray-300 rounded-full animate-bounce"></span>
+                  <span className="w-2 h-2 bg-gray-300 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></span>
+                  <span className="w-2 h-2 bg-gray-300 rounded-full animate-bounce" style={{ animationDelay: '0.4s' }}></span>
+                </div>
               </div>
             )}
-            
+
             {error && (
               <div className="flex items-start gap-3">
-                 <div className="bg-red-500 p-2 rounded-full flex-shrink-0 shadow-sm mt-1">
-                   <X className="w-4 h-4 text-white" />
-                 </div>
-                 <div className="bg-red-50 border border-red-200 text-red-600 p-3.5 rounded-2xl rounded-tl-none text-sm shadow-sm leading-relaxed whitespace-pre-wrap">
-                   Ups! Kesalahan sistem: {error.message}. (Apakah Anda baru saja menambahkan API Key ke .env? Sistem Next.js wajib di-restart agar kuncinya terbaca!)
-                 </div>
+                <div className="bg-red-500 p-2 rounded-full flex-shrink-0 shadow-sm mt-1">
+                  <X className="w-4 h-4 text-white" />
+                </div>
+                <div className="bg-red-50 border border-red-200 text-red-600 p-3.5 rounded-2xl rounded-tl-none text-sm shadow-sm leading-relaxed whitespace-pre-wrap">
+                  Ups! Kesalahan sistem: {error.message}. (Apakah Anda baru saja menambahkan API Key ke .env? Sistem Next.js wajib di-restart agar kuncinya terbaca!)
+                </div>
               </div>
             )}
             <div ref={messagesEndRef} />
@@ -90,15 +89,15 @@ export function ChatbotWidget() {
 
           {/* Input Area */}
           <form onSubmit={handleSubmit} className="p-3 bg-white border-t border-gray-100 flex items-center gap-3">
-            <input 
-              type="text" 
+            <input
+              type="text"
               value={input}
               onChange={handleInputChange}
               disabled={isLoading}
-              placeholder="Ketik pesan Anda..." 
+              placeholder="Ketik pesan Anda..."
               className="flex-grow bg-gray-100 border border-transparent rounded-full px-5 py-2.5 text-sm focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary focus:outline-none transition-all"
             />
-            <button 
+            <button
               type="submit"
               disabled={isLoading || !input.trim()}
               className="bg-brand-accent text-white p-2.5 rounded-full hover:brightness-110 disabled:opacity-50 transition-all flex-shrink-0 shadow-sm hover:-translate-y-0.5 disabled:hover:translate-y-0"
@@ -109,17 +108,17 @@ export function ChatbotWidget() {
         </div>
       )}
 
-      <button 
+      <button
         onClick={() => setIsOpen(!isOpen)}
-        className={`bg-brand-accent text-white p-4 rounded-full shadow-xl hover:scale-105 transition-all duration-300 flex items-center justify-center relative cursor-pointer ${isOpen ? 'rotate-12 scale-90 bg-gray-700' : 'hover:-translate-y-1'}`}
+        className={`bg-brand-accent text-white p-5 rounded-full shadow-[0_0_20px_rgba(244,63,94,0.3)] hover:scale-110 transition-all duration-300 flex items-center justify-center relative border-2 border-white/20 cursor-pointer ${isOpen ? 'rotate-12 scale-90 bg-gray-700' : 'hover:-translate-y-1 animate-pulse'}`}
       >
         {!isOpen && (
-           <span className="absolute -top-1 -right-1 flex h-3.5 w-3.5">
-             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-             <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-red-500"></span>
-           </span>
+          <span className="absolute -top-1 -right-1 flex h-4 w-4">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-4 w-4 bg-red-600 border border-white"></span>
+          </span>
         )}
-        {isOpen ? <X className="w-6 h-6" /> : <MessageSquare className="w-6 h-6" />}
+        {isOpen ? <X className="w-7 h-7" /> : <MessageSquare className="w-7 h-7" />}
       </button>
     </div>
   );

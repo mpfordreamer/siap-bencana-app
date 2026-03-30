@@ -21,7 +21,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           <div className="bg-white rounded-full p-1.5 flex items-center justify-center shadow-md">
             <Image src={logoSvg} alt="Logo" className="w-5 h-5 object-contain" />
           </div>
-          <span className="hidden md:block ml-3 text-white font-bold tracking-wider whitespace-nowrap text-xs md:text-sm">COMMAND CENTER</span>
+          <span className="hidden md:block ml-3 text-white font-bold tracking-wider whitespace-nowrap text-xs md:text-sm">ADMIN PANEL</span>
         </div>
 
         {/* Navigation - Gestalt: Similarity (Consistent link styles) */}

@@ -1,4 +1,4 @@
-import { Search } from "lucide-react";
+import { Search, ShieldCheck } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import logoSvg from "@/assets/siapbencana.svg";
@@ -11,34 +11,32 @@ export default function MarketingLayout({
 }) {
   return (
     <div className="flex flex-col min-h-screen bg-surface">
-      {/* Unified Main Header */}
-      <header className="border-b border-gray-200 bg-surface">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col lg:flex-row items-center justify-between gap-6">
+      {/* Optimized Sticky Header */}
+      <header className="sticky top-0 z-50 border-b border-gray-100 bg-white/95 backdrop-blur-md shadow-sm">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between">
 
-          {/* Custom SVG Logo & Title */}
-          <Link href="/" className="hover:opacity-90 transition-opacity flex-shrink-0 flex items-center gap-3">
-            <Image
-              src={logoSvg}
-              alt="Logo Siap Bencana"
-              className="h-10 w-auto object-contain"
-              priority
-            />
-            <span className="text-xl font-bold tracking-tight text-brand-primary hidden sm:block">SIAP BENCANA</span>
-          </Link>
-
-          {/* Search Bar */}
-          <div className="flex w-full lg:w-max shadow-sm border border-gray-300 rounded-sm overflow-hidden mt-4 lg:mt-0">
-            <div className="relative flex-grow flex items-center px-4 bg-white">
-              <Search className="w-4 h-4 text-gray-400 shrink-0" />
-              <input
-                type="text"
-                placeholder="Cari informasi darurat..."
-                className="w-full lg:w-64 py-2.5 px-3 outline-none text-sm font-medium text-gray-900 placeholder:text-gray-400 bg-transparent"
+          {/* Logo Section */}
+          <Link href="/" className="hover:opacity-90 transition-opacity flex items-center gap-2.5">
+            <div className="w-9 h-9 bg-brand-primary rounded-lg flex items-center justify-center p-1.5 shadow-md">
+              <Image
+                src={logoSvg}
+                alt="Logo Siap Bencana"
+                className="h-full w-full object-contain brightness-0 invert"
+                priority
               />
             </div>
-            <button className="bg-brand-accent hover:brightness-110 transition-colors text-white px-6 py-2.5 font-bold text-sm tracking-wide shrink-0">
-              Cari
-            </button>
+            <span className="text-lg font-black tracking-tighter text-brand-primary">SIAP BENCANA</span>
+          </Link>
+
+          {/* Action Section */}
+          <div className="flex items-center gap-4">
+            <Link
+              href="/dashboard"
+              className="group flex items-center gap-2 bg-orange-600 hover:bg-orange-700 transition-all text-white px-4 md:px-7 py-2.5 rounded-full font-black text-[11px] md:text-xs tracking-widest shadow-lg hover:shadow-orange-200 border-b-2 border-black/20"
+            >
+              <ShieldCheck className="w-4 h-4 text-white/50 group-hover:text-white transition-colors" />
+              <span className="inline-block">DASHBOARD <span className="hidden sm:inline">ADMIN</span></span>
+            </Link>
           </div>
         </div>
       </header>
@@ -73,7 +71,7 @@ export default function MarketingLayout({
               <ul className="space-y-4 text-gray-300 text-sm">
                 <li><Link href="/" className="hover:text-white transition-colors">Beranda Utama</Link></li>
                 <li><Link href="/register" className="hover:text-white transition-colors">Pendaftaran Warga</Link></li>
-                <li><Link href="/dashboard" className="hover:text-triage-info transition-colors font-medium">Command Center ➡️</Link></li>
+                <li><Link href="/dashboard" className="hover:text-triage-info transition-colors font-medium">Admin Panel</Link></li>
               </ul>
             </div>
 
@@ -81,12 +79,8 @@ export default function MarketingLayout({
               <h3 className="text-lg font-bold mb-6 text-gray-100">Kontak Darurat</h3>
               <ul className="space-y-4 text-gray-300 text-sm">
                 <li className="flex flex-col">
-                  <span className="font-semibold text-white mb-1">Telegram Siaga:</span>
-                  <a href="#" className="hover:text-triage-info transition-colors">@SiapBencanaBot</a>
-                </li>
-                <li className="flex flex-col">
                   <span className="font-semibold text-white mb-1">SMS Gateway:</span>
-                  <a href="tel:+62811" className="hover:text-triage-info transition-colors">+62 811-XXXX-XXXX</a>
+                  <a href="tel:+6285183071646" className="hover:text-triage-info transition-colors">+62 851-8307-1646</a>
                 </li>
               </ul>
             </div>
